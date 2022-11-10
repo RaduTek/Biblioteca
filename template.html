@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <head>
+        <title>Template - Biblioteca</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preload" href="SegoeUIVariable.woff2" as="font" type="font/woff2" crossorigin>
+        <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
+        <script src="jquery-3.6.1.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js"></script>
+    </head>
+    <body onload="bodyOnLoad()">
+        <div id="sus">
+            <div id="navTop">
+                <div id="navSidebarToggle">
+                    <button class="btn-round tt-parent" id="navSidebarToggleBtn">
+                        <span class="tt tt-br tt-delay m-deschide">Deschide meniu</span>
+                        <iconify-icon icon="fluent:navigation-20-filled" class="m-deschide" width="36"></iconify-icon>
+                        <span class="tt tt-br tt-delay m-inchide mobile-hide">Închide meniu</span>
+                        <iconify-icon icon="fluent:dismiss-20-filled" class="m-inchide mobile-hide" width="36"></iconify-icon>
+                    </button>
+                </div>
+                <div id="navLogo">
+                    <span id="navNumeApp">Biblioteca</span>
+                    <span id="navNumeSecundar"> Virtuală</span>
+                </div>
+                <div id="navSearch">
+                    <form id="formSearch">
+                        <button id="btnHideSearch" class="tt-parent" type="reset">
+                            <span class="tt tt-br tt-delay">Închide</span>
+                            <iconify-icon icon="fluent:dismiss-16-regular"></iconify-icon>
+                        </button>
+                        <input id="inputSearch" type="text" name="cauta" placeholder="Căutare"/>
+                        <button id="btnSearch" class="tt-parent" type="sumbit">
+                            <span class="tt tt-bl tt-delay">Caută</span>
+                            <iconify-icon icon="fluent:search-16-regular"></iconify-icon>
+                        </button>
+                    </form>
+                </div>
+                <div id="navUser">
+                    <div class="btn-round hold-focus tt-parent dd-parent" tabindex="0">
+                        <span class="tt tt-bl tt-delay">Mai multe</span>
+                        <iconify-icon icon="fluent:more-vertical-16-filled" width="36"></iconify-icon>
+                        <div class="dd dd-bl">
+                            <button class="dd-item">
+                                <iconify-icon icon="fluent:settings-16-regular" width="24"></iconify-icon>
+                                <label>Setări</label>
+                            </button>
+                            <button class="dd-item">
+                                <iconify-icon icon="fluent:info-16-regular" width="24"></iconify-icon>
+                                <label>Despre</label>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn-round tt-parent">
+                        <span class="tt tt-bl tt-delay">Autentifică-te</span>
+                        <label>Nu ești autentificat</label>
+                        <iconify-icon icon="fluent:person-16-regular" width="36"></iconify-icon>
+                    </button>
+                    <button id="btnShowSearch" class="btn-round tt-parent">
+                        <span class="tt tt-bl tt-delay">Căutare</span>
+                        <label>Căutare</label>
+                        <iconify-icon icon="fluent:search-16-regular" width="32"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="sidebar">
+            <div id="sidebarDim"></div>
+            <div id="navSidebar">
+                <div id="sidebarProfile">
+                    <div id="sidebarProfileBack"></div>
+                    <div id="sidebarProfileFore">
+                        <img id="sidebarProfileImg" src="imagini/user-placeholder.jpg" />
+                        <span id="sidebarProfileNume">Nu ești autentificat</span>
+                    </div>
+                </div>
+                
+                <div class="sidebarHead">Catalog</div>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:library-16-filled" width="18"></iconify-icon>
+                    Cărți
+                </button>
+                <div class="sidebarCat" id="books">
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:backpack-16-filled" width="18"></iconify-icon>
+                        Educație
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:people-16-filled" width="18"></iconify-icon>
+                        Societate
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:city-24-filled" width="18"></iconify-icon>
+                        Ficțiune
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:teddy-24-filled" width="18"></iconify-icon>
+                        Copii
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:weather-moon-24-filled" width="18"></iconify-icon>
+                        Spiritualitate
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:compass-northwest-24-filled" width="18"></iconify-icon>
+                        Cultură
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:beaker-24-filled" width="18"></iconify-icon>
+                        Specialitate
+                    </button>
+                </div>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:play-circle-16-filled" width="18"></iconify-icon>
+                    Muzică
+                </button>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:movies-and-tv-16-filled" width="18"></iconify-icon>
+                    Filme
+                </button>
+
+                <div class="sidebarHead">Explorează</div>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:people-team-24-filled" width="18"></iconify-icon>
+                    Comunitate
+                </button>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:guardian-24-filled" width="18"></iconify-icon>
+                    Servicii Caritabile
+                </button>
+            </div>
+        </div>
+
+        <div id="modalHost">
+            <div id="modalBack"></div>
+            <div class="modal" id="msgModal">
+                <div class="modal-head">
+                    <iconify-icon id="msgModalIcon" width="24"></iconify-icon>
+                    <label id="msgModalTitle">Message Title</label>
+                </div>
+                <div class="modal-content">
+                    <div class="form-field" id="msgModalText">
+                        Message Text
+                    </div>
+                    <!-- <div class="form-field" id="msgModalTextInput">
+                        <label id="msgModalTextInputHint"></label>
+                        <input type="text" class="textbox" id="msgModalTextInputField" />
+                    </div> -->
+                </div>
+                <div class="modal-foot">
+                    <button class="btn" id="msgModalBtn1">Button 1</button>
+                    <button class="btn" id="msgModalBtn2">Button 2</button>
+                </div>
+            </div>
+
+            <div class="modal" id="modal1">
+                <form id="form1">
+                    <script>
+                        $("#form1").on("submit", function (e) {
+                            e.preventDefault();
+                            modalMsg("Hello, world!", "<b>Hi, " + $("#name").val() + "!</b> How are you doing today?<br/>I hope you have a very good day.", "Thanks!");
+                            return false;
+                        });
+                    </script>
+                    <div class="modal-head">
+                        <label>Modal Title</label>
+                    </div>
+                    <div class="modal-content">
+                        <div class="form-field">
+                            <label>Enter your name:</label>
+                            <input type="text" class="textbox" id="name" />
+                        </div>
+                        <div class="form-field">
+                            <label>Enter your name:</label>
+                            <input type="text" class="textbox" id="name" />
+                        </div>
+                        <div class="form-field">
+                            <label class="checkbox">
+                                <input type="checkbox" id="tset" />
+                                A checkbox
+                            </label>
+                            <label class="checkbox">
+                                <input type="radio" id="tset" />
+                                A checkbox
+                            </label>
+                            <label class="checkbox">
+                                <input type="radio" id="tset" />
+                                A checkbox
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-foot">
+                        <button class="btn" type="submit">OK</button>
+                        <button class="btn btn-red" type="button" onclick="modalClose()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="pagina">
+            <div id="continut">
+                <div class="form-field">
+                    
+                </div>
+                <div class="form-field">
+                    <button class="btn btn-green" onclick="modalOpen('modal1')">Open Modal</button>
+                </div>
+                <div class="form-field">
+                    <label>Open message modal</label>
+                    <select class="selectbox" id="mbtnsel">
+                        <option>1 button</option>
+                        <option>2 buttons</option>
+                    </select>
+                    <input type="text" class="textbox" id="mtitle" placeholder="Title" />
+                    <input type="text" class="textbox" id="mtext" placeholder="Text" />
+                    <input type="text" class="textbox" id="mbtn1text" placeholder="Button 1 Text" />
+                    <input type="text" class="textbox" id="mbtn1color" placeholder="Button 1 Color" />
+                    <input type="text" class="textbox" id="micon" placeholder="Icon" />
+                    <button class="btn btn-green" onclick="openMsgModal()">Message Modal!</button>
+                    <script>
+                        function openMsgModal() {
+                            modalMsg($("#mtitle").val(), $("#mtext").val(), $("#mbtn1text").val(), function() {
+                                modalMsg("hey", "hey", "hey");
+                            }, $("#mbtn1color").val(), $("#micon").val(), true);
+                        }
+                    </script>
+                </div>
+
+                <div class="form-field">
+                    <label>Open toast</label>
+                    <input type="text" class="textbox" id="ttext" placeholder="Text" />
+                    <input type="text" class="textbox" id="ticon" placeholder="Icon" />
+                    <button class="btn btn-green" onclick="openToast()">Toast!</button>
+                    <script>
+                        function openToast() {
+                            toastShow($("#ttext").val());
+                        }
+                    </script>
+                </div>
+
+                <div class="sub">
+                    <div class="table">
+                        <table>
+                            <tr>
+                                <th class="title">Titlu</th>
+                                <th class="author">Autor</th>
+                                <th class="genre">Gen</th>
+                            </tr>
+                            <tr>
+                                <td>Carte 1 cu titlu lung</td>
+                                <td>Autor 1</td>
+                                <td>Gen</td>
+                            </tr>
+                            <tr>
+                                <td>Carte 1</td>
+                                <td>Autor 1</td>
+                                <td>Gen</td>
+                            </tr>
+                            <tr>
+                                <td>Carte 1</td>
+                                <td>Autor 1</td>
+                                <td>Gen</td>
+                            </tr>
+                            <tr>
+                                <td>Carte 1</td>
+                                <td>Autor 1</td>
+                                <td>Gen</td>
+                            </tr>
+                            <tr>
+                                <td>Carte 1</td>
+                                <td>Autor 1</td>
+                                <td>Gen</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="toastHost">
+            <div class="toast">
+                <iconify-icon class="toastIcon" icon="fluent:info-24-filled"></iconify-icon>
+                <div class="toastMsg">
+                    Sample toast message<br>
+                    Toast message line 2
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
