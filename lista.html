@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <head>
+        <title>Template - Biblioteca</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="preload" href="font/SegoeUIVariable.woff" as="font" type="font/woff" crossorigin>
+        <link rel="preload" href="font/SegoeUIVariable.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="css/style.css" />
+
+        <script type="text/javascript" src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+
+        <script type="text/javascript" src="js/script.js"></script>
+    </head>
+    <body onload="bodyOnLoad()">
+        <div id="sus">
+            <div id="navTop">
+                <div id="navSidebarToggle">
+                    <button class="btn-round tt-parent" id="navSidebarToggleBtn">
+                        <span class="tt tt-br tt-delay m-deschide">Deschide meniu</span>
+                        <iconify-icon icon="fluent:navigation-20-filled" class="m-deschide" width="36"></iconify-icon>
+                        <span class="tt tt-br tt-delay m-inchide mobile-hide">Închide meniu</span>
+                        <iconify-icon icon="fluent:dismiss-20-filled" class="m-inchide mobile-hide" width="36"></iconify-icon>
+                    </button>
+                </div>
+                <div id="navLogo">
+                    <a href="index.html">
+                        <span id="navNumeApp">Biblioteca</span>
+                        <span id="navNumeSecundar"> Virtuală</span>
+                    </a>
+                </div>
+                <div id="navSearch">
+                    <form id="formSearch">
+                        <button id="btnHideSearch" class="tt-parent" type="reset">
+                            <span class="tt tt-br tt-delay">Închide</span>
+                            <iconify-icon icon="fluent:dismiss-16-regular"></iconify-icon>
+                        </button>
+                        <input id="inputSearch" type="text" name="cauta" placeholder="Căutare"/>
+                        <button id="btnSearch" class="tt-parent" type="sumbit">
+                            <span class="tt tt-bl tt-delay">Caută</span>
+                            <iconify-icon icon="fluent:search-16-regular"></iconify-icon>
+                        </button>
+                    </form>
+                </div>
+                <div id="navUser">
+                    <a href="login.html">
+                        <button class="btn-round tt-parent">
+                            <span class="tt tt-bl tt-delay">Autentifică-te</span>
+                            <label>Autentifică-te</label>
+                            <iconify-icon icon="fluent:person-16-regular" width="36"></iconify-icon>
+                        </button>
+                    </a>
+                    <button id="btnShowSearch" class="btn-round tt-parent">
+                        <span class="tt tt-bl tt-delay">Căutare</span>
+                        <label>Căutare</label>
+                        <iconify-icon icon="fluent:search-16-regular" width="32"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="sidebar">
+            <div id="sidebarDim"></div>
+            <div id="navSidebar">
+                <div id="sidebarProfile">
+                    <div id="sidebarProfileBack"></div>
+                    <div id="sidebarProfileFore">
+                        <img id="sidebarProfileImg" src="imagini/user-placeholder.jpg" />
+                        <span id="sidebarProfileNume">Nu ești autentificat</span>
+                    </div>
+                </div>
+                
+                <div class="sidebarHead">Catalog</div>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:library-16-filled" width="18"></iconify-icon>
+                    Cărți
+                </button>
+                <div class="sidebarCat" id="books">
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:backpack-16-filled" width="18"></iconify-icon>
+                        Educație
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:people-16-filled" width="18"></iconify-icon>
+                        Societate
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:city-24-filled" width="18"></iconify-icon>
+                        Ficțiune
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:teddy-24-filled" width="18"></iconify-icon>
+                        Copii
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:weather-moon-24-filled" width="18"></iconify-icon>
+                        Spiritualitate
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:compass-northwest-24-filled" width="18"></iconify-icon>
+                        Cultură
+                    </button>
+                    <button class="sidebarBtn">
+                        <iconify-icon icon="fluent:beaker-24-filled" width="18"></iconify-icon>
+                        Specialitate
+                    </button>
+                </div>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:play-circle-16-filled" width="18"></iconify-icon>
+                    Muzică
+                </button>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:movies-and-tv-16-filled" width="18"></iconify-icon>
+                    Filme
+                </button>
+
+                <div class="sidebarHead">Explorează</div>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:people-team-24-filled" width="18"></iconify-icon>
+                    Comunitate
+                </button>
+                <button class="sidebarBtn">
+                    <iconify-icon icon="fluent:guardian-24-filled" width="18"></iconify-icon>
+                    Servicii Caritabile
+                </button>
+            </div>
+        </div>
+
+        <div id="pagina">
+            <div id="continut">
+                
+                <h1>Cărți</h1>
+
+                <div class="sub">
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="title">Titlu</th>
+                                    <th class="author">Autor</th>
+                                    <th class="genre">Gen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Carte 1 cu titlu lung</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="sub">
+                    <div class="form-field">
+                        <div class="pagination">
+                            <button class="btn"><iconify-icon icon="fluent:chevron-left-16-filled"></iconify-icon></button>
+                            <button class="btn">1</button>
+                            <button class="btn">2</button>
+                            <button class="btn">3</button>
+                            <button class="btn" disabled>...</button>
+                            <button class="btn">99</button>
+                            <button class="btn"><iconify-icon icon="fluent:chevron-right-16-filled"></iconify-icon></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="toastHost"></div>
+    </body>
+</html>
