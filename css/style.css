@@ -7,8 +7,27 @@
     font-display: swap;
 }
 
+:root {
+    --font-main: 'Segoe UI Variable', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-default: 12pt;
+
+    --button-radius: 6px;
+}
+
 body {
-    font-family: 'Segoe UI Variable', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-main);
+    font-size: var(--font-default);
+}
+
+.btn iconify-icon,
+.btn-round iconify-icon,
+button iconify-icon {
+    transition: transform 0.3s;
+}
+.btn:active iconify-icon,
+.btn-round:active > iconify-icon,
+button:active iconify-icon {
+    transform: scale(80%);
 }
 
 .mobile-hide {
@@ -21,6 +40,20 @@ body {
     left: 0;
     right: 0;
     z-index: 999;
+}
+
+.form-field {
+    margin-bottom: 8px;
+}
+.form-field .btn,
+.form-field input,
+.form-field label {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.form-field label {
+    display: block;
+    margin-bottom: 4px;
 }
 
 .tt-parent {
@@ -144,19 +177,19 @@ body {
     outline: none;
     padding: 2px 6px 3px;
     margin: 0px 2px;
-    background: transparent;
+    background-color: transparent;
     transition: background-color 0.2s;
     display: flex;
     user-select: none;
 }
 .btn-round.hold-focus:focus {
-    background: rgba(0,0,0,11%);
+    background-color: rgba(0,0,0,11%);
 }
 .btn-round:hover {
-    background: rgba(0,0,0,7%);
+    background-color: rgba(0,0,0,7%);
 }
 .btn-round:active {
-    background: rgba(0,0,0,14%);
+    background-color: rgba(0,0,0,14%);
 }
 .btn-round iconify-icon {
     flex: 0;
@@ -169,6 +202,9 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.btn-round[disabled] {
+    background-color: transparent;
+}
 
 .btn {
     font-family: inherit;
@@ -176,7 +212,7 @@ body {
     font-weight: inherit;
     color: inherit;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--button-radius);
     padding: 4px 10px;
     background-color: rgba(0,0,0,10%);
     border-bottom: 2px solid rgba(0,0,0,15%);
@@ -216,6 +252,20 @@ body {
 .btn.btn-red:active {
     background-color: #cf5a5a;
 }
+.btn label {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+.btn iconify-icon {
+    font-size: 18px;
+    margin: -4px 0 -4px -4px;
+}
+.btn[disabled] {
+    color: #888;
+    background-color: rgba(0,0,0,6%);
+    border-bottom: 2px solid rgba(0,0,0,8%);
+}
 
 .textbox {
     font-family: inherit;
@@ -249,18 +299,26 @@ body {
     border-bottom-color: #67b8e7;
 }
 
-.form-field {
-    margin-bottom: 8px;
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: 4px;
 }
-.form-field .btn,
-.form-field input,
-.form-field label {
-    margin-left: 2px;
-    margin-right: 2px;
+.pagination .btn {
+    margin: 0px;
+    border-radius: 0;
+    border-right: 1px solid rgba(0,0,0, 10%);
 }
-.form-field label {
-    display: block;
-    margin-bottom: 4px;
+.pagination .btn:last-child {
+    border-radius: 0 var(--button-radius) var(--button-radius) 0;
+    border-right: none;
+}
+.pagination .btn:first-child {
+    border-radius: var(--button-radius) 0 0 var(--button-radius);
+}
+.pagination .btn iconify-icon {
+    margin: 2px -4px -3px -4px;
 }
 
 #navTop {
@@ -344,7 +402,7 @@ body {
     background: transparent;
     width: 30px;
     padding: 3px 3px 0 3px;
-    border-radius: 4px;
+    border-radius: var(--button-radius);
     font-family: inherit;
     font-size: 20px;
     transition: background-color 0.2s;
@@ -567,15 +625,17 @@ body {
     width: 100%;
     border-collapse: collapse; 
 }
-
+.table table thead tr {
+    background-color: rgba(0,0,0,10%);
+}
 .table table tr {
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,20%);
 }
-.table table tr:nth-child(even) {
-    background-color: rgba(0,0,0,0.03);
+.table table tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,3%);
 }
-.table table tr:not(:first-child):hover {
-    background-color: rgba(0,0,0,0.05);
+.table table tbody tr:hover {
+    background-color: rgba(0,0,0,5%);
 }
 .table table td,
 .table table th {

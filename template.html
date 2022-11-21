@@ -8,12 +8,10 @@
         <link rel="preload" href="font/SegoeUIVariable.woff" as="font" type="font/woff" crossorigin>
         <link rel="preload" href="font/SegoeUIVariable.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/modal.css" />
 
         <script type="text/javascript" src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
         <script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
 
-        <script type="text/javascript" src="js/modal.js"></script>
         <script type="text/javascript" src="js/script.js"></script>
     </head>
     <body onload="bodyOnLoad()">
@@ -45,7 +43,7 @@
                     </form>
                 </div>
                 <div id="navUser">
-                    <div class="btn-round hold-focus tt-parent dd-parent" tabindex="0">
+                    <!-- <div class="btn-round hold-focus tt-parent dd-parent" tabindex="0">
                         <span class="tt tt-bl tt-delay">Mai multe</span>
                         <iconify-icon icon="fluent:more-vertical-16-filled" width="36"></iconify-icon>
                         <div class="dd dd-bl">
@@ -58,7 +56,7 @@
                                 <label>Despre</label>
                             </button>
                         </div>
-                    </div>
+                    </div> -->
                     <button class="btn-round tt-parent">
                         <span class="tt tt-bl tt-delay">Autentifică-te</span>
                         <label>Nu ești autentificat</label>
@@ -139,7 +137,7 @@
             </div>
         </div>
 
-        <div id="modalHost" class="">
+        <!-- <div id="modalHost" class="">
             <div id="modal1" class="modal">
                 <div class="modalTitle">
                     <div>Modal Title</div>
@@ -152,12 +150,16 @@
                     <button class="btn btn-green">OK</button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div id="pagina">
             <div id="continut">
                 <div class="form-field">
-                    <button class="btn btn-red">No</button>
+                    <button class="btn btn-red">
+                        <iconify-icon icon="fluent:add-square-multiple-16-filled"></iconify-icon>
+                        <label>Button</label>
+                    </button>
+                    <button class="btn btn-green">OK</button>
                 </div>
                 <div class="form-field">
                     <label>Open toast</label>
@@ -167,7 +169,7 @@
                     <button class="btn btn-green" onclick="openToast()">Toast!</button>
                     <script>
                         function openToast() {
-                            toastShow($("#ttext").val(), duration=$("#delay").val(), icon=$("#ticon").val());
+                            toastShow($("#ttext").val(), duration=$("#tdelay").val(), icon=$("#ticon").val());
                         }
                     </script>
                 </div>
@@ -175,44 +177,61 @@
                 <div class="sub">
                     <div class="table">
                         <table>
-                            <tr>
-                                <th class="title">Titlu</th>
-                                <th class="author">Autor</th>
-                                <th class="genre">Gen</th>
-                            </tr>
-                            <tr>
-                                <td>Carte 1 cu titlu lung</td>
-                                <td>Autor 1</td>
-                                <td>Gen</td>
-                            </tr>
-                            <tr>
-                                <td>Carte 1</td>
-                                <td>Autor 1</td>
-                                <td>Gen</td>
-                            </tr>
-                            <tr>
-                                <td>Carte 1</td>
-                                <td>Autor 1</td>
-                                <td>Gen</td>
-                            </tr>
-                            <tr>
-                                <td>Carte 1</td>
-                                <td>Autor 1</td>
-                                <td>Gen</td>
-                            </tr>
-                            <tr>
-                                <td>Carte 1</td>
-                                <td>Autor 1</td>
-                                <td>Gen</td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th class="title">Titlu</th>
+                                    <th class="author">Autor</th>
+                                    <th class="genre">Gen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Carte 1 cu titlu lung</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                                <tr>
+                                    <td>Carte 1</td>
+                                    <td>Autor 1</td>
+                                    <td>Gen</td>
+                                </tr>
+                            </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="sub">
+                    <div class="form-field">
+                        <div class="pagination">
+                            <button class="btn"><iconify-icon icon="fluent:chevron-left-16-filled"></iconify-icon></button>
+                            <button class="btn">1</button>
+                            <button class="btn">2</button>
+                            <button class="btn">3</button>
+                            <button class="btn" disabled>...</button>
+                            <button class="btn">99</button>
+                            <button class="btn"><iconify-icon icon="fluent:chevron-right-16-filled"></iconify-icon></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="toastHost">
-            <div class="toast show">
+            <!-- <div class="toast show">
                 <iconify-icon class="toastIcon" icon="fluent:checkmark-24-filled"></iconify-icon>
                 <div class="toastMsg">
                     Toast message<br>
@@ -220,7 +239,7 @@
                 </div>
                 <button class="toastBtn">Action</button>
                 <button class="toastBtn"><iconify-icon class="toastIcon" icon="fluent:dismiss-16-filled" width="18"></iconify-icon></button>
-            </div>
+            </div> -->
         </div>
     </body>
 </html>
