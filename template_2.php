@@ -111,7 +111,7 @@
                 
                 <?php  if(isset($_SESSION['user_nume'])) if ($_SESSION['user_tip'] == 'admin') { ?>
                 <div class="sidebarHead">Administrare</div>
-                <a href="admin.php?imprumuturi" class="sidebarBtn">
+                <a href="imprumuturi.php" class="sidebarBtn">
                     <iconify-icon icon="fluent:document-header-arrow-down-20-filled" width="20"></iconify-icon>
                     Împrumuturi
                 </a>
