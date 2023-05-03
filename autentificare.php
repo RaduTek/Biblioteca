@@ -22,6 +22,7 @@ if (isset($_POST['login_form'])) {
             $_SESSION['user_email'] = $row['email'];
             $_SESSION['user_tip'] = $row['tip'];
             $_SESSION['user_nume'] = $row['nume'];
+            $_SESSION['user_password'] = $row['parola'];
             $login_result = 'ok';
             redirect('cont.php');
         } else {
