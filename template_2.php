@@ -131,7 +131,7 @@
 
                 while($row = $result -> fetch_assoc()) {
                     echo '<a href="carti.php?categorie=' . $row['id'] . '" class="sidebarBtn">';
-                    // echo '<iconify-icon icon="' . $row['icon'] . '" width="20"></iconify-icon>';
+                    echo '<iconify-icon icon="fluent:book-20-regular" width="20"></iconify-icon>';
                     echo $row['nume'] . '</a>';
                 }
                 ?>
