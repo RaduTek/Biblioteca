@@ -8,6 +8,14 @@ if (!isset($_SESSION['user_id'])) {
     redirect('autentificare.php');
 }
 
+$stari = [
+    "asteptare" => "În așteptare",
+    "predat" => "Predat",
+    "anulat" => "Anulat",
+    "returnat" => "Returnat",
+];
+
+
 $user_id = $_SESSION['user_id'];
 
 if (isset($_GET['salveaza'])) {
@@ -201,6 +209,43 @@ include_once('template_2.php');
                     <iconify-icon icon="fluent:checkbox-checked-20-regular" width="20"></iconify-icon>
                     <label>Citite</label>
                 </a>
+            </div>
+            <div class="sub book-list">
+            <?php 
+                
+                $sign = ($pagina == 'imprumuturi') ? '!' : ''; 
+                $operand = ($pagina == 'imprumuturi') ? 'AND' : 'OR'; 
+
+                $query = "SELECT biblioteca_imprumuturi.user, biblioteca_imprumuturi.carte, biblioteca_imprumuturi.stare, biblioteca_carti.* FROM biblioteca_imprumuturi
+                    INNER JOIN biblioteca_carti ON biblioteca_carti.id=biblioteca_imprumuturi.carte
+                    WHERE biblioteca_imprumuturi.user = ? AND biblioteca_imprumuturi.stare " . $sign . "= 'returnat' " . $operand . " biblioteca_imprumuturi.stare " . $sign . "= 'anulat'
+                    ORDER BY biblioteca_carti.titlu";
+                
+                $stmt = $bazadate -> prepare($query);
+                $stmt -> bind_param("s", $_SESSION['user_id']);
+                $stmt -> execute();
+                $result = $stmt -> get_result();
+                if (($result -> num_rows) == 0) {
+                    echo "Momentan niciun împrumut.";
+                } 
+                while ($c_data = $result->fetch_assoc()) {
+            ?>
+                <div class="book">
+                    <div class="book-image">
+                        <a href="carte.php?id=<?php echo $c_data['id'] ?>">
+                            <img src="<?php if (strlen($c_data['imagine']) > 1) echo $c_data['imagine']; else echo 'imagini/book-cover-placeholder.png'; ?>">
+                        </a>
+                    </div>
+                    <div class="book-details">
+                        <div class="book-overview">
+                            <a class="book-title" href="carte.php?id=<?php echo $c_data['id'] ?>"><?php echo $c_data['titlu'] ?></a><br />
+                            <a class="book-author"><?php echo $c_data['autor'] ?></a><br />
+                            <a class="book-author">Stare: <?php echo $stari[$c_data['stare']]; ?></a><br />
+                            <p class="book-description"><?php echo substr($c_data['descriere'],0,150); ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
             </div>
 
             <?php if ($pagina == 'setari') { ?>
