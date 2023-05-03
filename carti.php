@@ -192,7 +192,7 @@ $nr_pagini = ceil($nr_resultate / $nr_pe_pagina);
                         <label>Salvează</label>
                     </a>
                     <?php } ?>
-                    <a class="btn" href="cont.php?imprumuta=<?php echo $row['id'] ?>">
+                    <a class="btn" href="imprumut.php?carte=<?php echo $row['id'] ?>">
                         <iconify-icon icon="fluent:arrow-square-down-20-regular" width="20"></iconify-icon>
                         <label>Împrumută</label>
                     </a>
