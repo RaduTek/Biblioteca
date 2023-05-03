@@ -31,6 +31,8 @@ if (isset($_POST['adaugare_carte'])) {
     $stmt -> bind_param("sssssss", $c_titlu, $c_autor, $c_isbn, $c_categorie, $c_imagine, $c_descriere, $c_id);
     $status = $stmt -> execute();
     $page_msg = "edit_" . ($status ? "ok" : "fail");
+    $_SESSION['result_msg'] = $page_msg;
+    redirect('carte.php?id=' . $c_id);
 
 } else if (isset($_GET['editeaza'])) {
     $titlu_pagina = "Modifică o carte";

@@ -28,6 +28,15 @@ include_once('template_2.php');
 ?>
 
 <div id="continut">
+    <?php if (isset($_SESSION['result_msg'])) {
+        if ($_SESSION['result_msg'] == "edit_ok") { ?>
+            <div class="alertbox btn-green">Cartea a fost modificată cu succes!</div><br/>
+
+        <?php } else if ($_SESSION['result_msg'] == "edit_fail") { ?>
+            <div class="alertbox btn-red">Eroare la modificarea cărții!</div><br/>
+        <?php }
+        unset($_SESSION['result_msg']);
+    } ?>
     <?php if(isset($page_msg) && $page_msg == 'notfound') { ?> 
         <h1>Carte</h1>
         <div style="text-align: center"> 
@@ -71,7 +80,7 @@ include_once('template_2.php');
                         </tr>
                         <tr>
                             <td><iconify-icon icon="fluent:arrow-square-down-20-regular" width="20"></iconify-icon></td>
-                            <td><a href="cont.php?imprumuta=<?php echo $c_id; ?>">Împrumută</a></td>
+                            <td><a href="imprumut.php?carte=<?php echo $c_id; ?>">Împrumută</a></td>
                         </tr>
                     </tbody>
                 </table>
