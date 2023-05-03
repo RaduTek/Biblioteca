@@ -5,6 +5,10 @@ ini_set("display_errors", 1);
 
 session_start();
 
+if (!file_exists("env.php")){
+    echo "Environment variable file (env.php) not defined!";
+    exit();
+}
 include_once("env.php");
 
 $titlu_aplicatie = "Biblioteca Mea";
