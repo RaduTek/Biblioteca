@@ -10,9 +10,9 @@ if (!isset($_SESSION['user_id'])) {
 
 $stari = [
     "asteptare" => "În așteptare",
-    "predat" => "Predat",
+    "predat" => "Primit",
     "anulat" => "Anulat",
-    "returnat" => "Returnat",
+    "returnat" => "Înapoiat",
 ];
 
 
