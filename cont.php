@@ -40,6 +40,63 @@ if (isset($_GET['salveaza'])) {
         $_SESSION['save_result'] = "not_saved";
     }
     redirect('carti.php?salvate');
+} else if (isset($_POST['parola_noua'])) {
+    $u_password = $_POST['parola_curenta'];
+    $u_password_new = $_POST['parola_noua'];
+    $u_password_c = $_POST['parola_noua_c'];
+    $u_id = $_SESSION['user_id'];
+
+    if ($u_password_new != $u_password_c) {
+        $page_msg = "password_no_match";
+    } else {
+        $u_password_hash = password_hash($u_password_new, PASSWORD_DEFAULT);
+    
+        if (password_verify($u_password, $_SESSION['user_password'])) {
+            $stmt = $bazadate -> prepare("UPDATE biblioteca_useri SET parola = ? WHERE id = ?");
+            $stmt -> bind_param("ss", $u_password_hash, $u_id);
+            $status = $stmt -> execute();
+            if ($status) {
+                $_SESSION['user_password'] = $u_password_hash;
+            }
+            $page_msg = "password_change_" . ($status ? "ok" : "fail");
+        } else {
+            $page_msg = "password_incorrect";
+        }
+    }
+
+} else if (isset($_POST['email_nou'])) {
+    $u_email = $_POST['email_nou'];
+    $u_password = $_POST['parola_curenta'];
+    $u_id = $_SESSION['user_id'];
+
+    if (password_verify($u_password, $_SESSION['user_password'])) {
+        $stmt = $bazadate -> prepare("UPDATE biblioteca_useri SET email = ? WHERE id = ?");
+        $stmt -> bind_param("ss", $u_email, $u_id);
+        $status = $stmt -> execute();
+        if ($status) {
+            $_SESSION['user_email'] = $u_email;
+        }
+        $page_msg = "email_change_" . ($status ? "ok" : "fail");
+    } else {
+        $page_msg = "password_incorrect";
+    }
+
+} else if (isset($_POST['nume_nou'])) {
+    $u_nume = $_POST['nume_nou'];
+    $u_password = $_POST['parola_curenta'];
+    $u_id = $_SESSION['user_id'];
+
+    if (password_verify($u_password, $_SESSION['user_password'])) {
+        $stmt = $bazadate -> prepare("UPDATE biblioteca_useri SET nume = ? WHERE id = ?");
+        $stmt -> bind_param("ss", $u_nume, $u_id);
+        $status = $stmt -> execute();
+        if ($status) {
+            $_SESSION['user_nume'] = $u_nume;
+        }
+        $page_msg = "name_change_" . ($status ? "ok" : "fail");
+    } else {
+        $page_msg = "password_incorrect";
+    }
 }
 
 $pagina = 'imprumuturi';
@@ -58,6 +115,35 @@ include_once('template_2.php');
 ?>
 
 <div id="continut">
+    <?php if (isset($page_msg)) {
+        if ($page_msg == "password_incorrect") { ?>
+            <div class="alertbox btn-red">Parola introdusă nu este corectă!</div><br/>
+
+        <?php } else if ($page_msg == "password_no_match") { ?>
+            <div class="alertbox btn-red">Parolele nu se potrivesc!</div><br/>
+
+        <?php } else if ($page_msg == "password_change_ok") { ?>
+            <div class="alertbox btn-green">Parola contului a fost schimbată cu succes!</div><br/>
+
+        <?php } else if ($page_msg == "password_change_fail") { ?>
+            <div class="alertbox btn-red">Eroare la modificarea parolei!</div><br/>
+
+            <?php } else if ($page_msg == "email_change_ok") { ?>
+            <div class="alertbox btn-green">Adresa de mail a fost schimbată cu succes!</div><br/>
+
+        <?php } else if ($page_msg == "email_change_fail") { ?>
+            <div class="alertbox btn-red">Eroare la modificarea adresei de mail!</div><br/>
+
+        <?php } else if ($page_msg == "name_change_ok") { ?>
+            <div class="alertbox btn-green">Numele a fost schimbat cu succes!</div><br/>
+
+        <?php } else if ($page_msg == "name_change_fail") { ?>
+            <div class="alertbox btn-red">Eroare la modificarea numelui!</div><br/>
+
+        <?php } else if ($page_msg == "not_found") { ?>
+            <div class="alertbox btn-red">Cartea selectată nu există!</div><br/>
+        <?php }
+    } ?>
     <h1>Contul Meu</h1>
     <div class="split-page" style="padding-top: 20px">
         <div class="split-small cards cards-vertical">
@@ -116,6 +202,55 @@ include_once('template_2.php');
                     <label>Citite</label>
                 </a>
             </div>
+
+            <?php if ($pagina == 'setari') { ?>
+
+                <form action="cont.php?p=setari" method="post">
+                    <h2>Schimbă parola</h2>
+                    <label class="form-field">
+                        <div>Parola veche</div>
+                        <input type="password" class="textbox" name="parola_curenta" style="width: 100%;" required />
+                    </label>
+                    <label class="form-field">
+                        <div>Parola nouă</div>
+                        <input type="password" class="textbox" name="parola_noua" style="width: 100%;" required />
+                    </label>
+                    <label class="form-field">
+                        <div>Confirmă</div>
+                        <input type="password" class="textbox" name="parola_noua_c" style="width: 100%;" required />
+                    </label>
+                    <button type="submit" class="btn btn-green">Schimbă parola</button>
+                </form>
+                <br>
+
+                <form action="cont.php?p=setari" method="post">
+                    <h2>Schimbă adresa de mail</h2>
+                    <label class="form-field">
+                        <div>Adresa nouă de mail</div>
+                        <input type="text" class="textbox" name="email_nou" style="width: 100%;" required />
+                    </label>
+                    <label class="form-field">
+                        <div>Parola curentă</div>
+                        <input type="password" class="textbox" name="parola_curenta" style="width: 100%;" required />
+                    </label>
+                    <button type="submit" class="btn btn-green">Schimbă adresa de mail</button>
+                </form>
+                <br>
+
+                <form action="cont.php?p=setari" method="post">
+                    <h2>Schimbă numele</h2>
+                    <label class="form-field">
+                        <div>Nume nou</div>
+                        <input type="text" class="textbox" name="nume_nou" style="width: 100%;" required />
+                    </label>
+                    <label class="form-field">
+                        <div>Parola curentă</div>
+                        <input type="password" class="textbox" name="parola_curenta" style="width: 100%;" required />
+                    </label>
+                    <button type="submit" class="btn btn-green">Schimbă numele</button>
+                </form>
+            <?php } else { ?>
+            <?php } ?>
         </div>
     </div>
 </div>
