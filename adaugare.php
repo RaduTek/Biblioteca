@@ -75,8 +75,10 @@ include_once('template_2.php');
 
 ?>
 
-<?php if (isset($tip_pagina) && $tip_pagina == "sterge") { ?>
 <div id="continut">
+<?php if (isset($_SESSION['user_tip']) && $_SESSION['user_tip'] = 'admin') { ?>
+
+<?php if (isset($tip_pagina) && $tip_pagina == "sterge") { ?>
     <h1 style="color:red">Șterge o carte</h1>
     <?php if(isset($page_msg) && $page_msg == "not_found") { ?> 
         <p>Cartea cu ID-ul specificat nu există în baza de date.</p>
@@ -108,14 +110,10 @@ include_once('template_2.php');
             <a href="carte.php?id=<?php echo $c_id ?>" class="btn">Anulează</a>
         </div>
     <?php } ?>
-</div>
+
 <?php } else { ?>
 
-<div id="continut">
     <h1><?php if (isset($c_data)) echo 'Modifică'; else echo 'Adaugă'; ?> o carte</h1>
-    <?php if (isset($_SESSION['user_tip']) && $_SESSION['user_tip'] = 'admin') { ?>
-
-        
     <?php if (isset($page_msg)) {
         if ($page_msg == "insert_ok") { ?>
             <div class="alertbox btn-green">Cartea a fost adăugată cu succes!</div><br/>
@@ -159,17 +157,17 @@ include_once('template_2.php');
                 ?>
             </select>
             <?php if (isset($c_data)) { ?> 
-            <script>
-            var val = '<?php echo $c_data['categorie']; ?>';
-            var mySelect = document.getElementById('categorie');
+                <script>
+                var val = '<?php echo $c_data['categorie']; ?>';
+                var mySelect = document.getElementById('categorie');
 
-            for(var i, j = 0; i = mySelect.options[j]; j++) {
-                if(i.value == val) {
-                    mySelect.selectedIndex = j;
-                    break;
+                for(var i, j = 0; i = mySelect.options[j]; j++) {
+                    if(i.value == val) {
+                        mySelect.selectedIndex = j;
+                        break;
+                    }
                 }
-            }
-            </script>
+                </script>
             <?php } ?>
         </label>
         <label class="form-field">
@@ -185,11 +183,12 @@ include_once('template_2.php');
             <button type="reset" class="btn btn-red">Anulează</button>
         </div>
     </form>
-    <?php } else { ?>
-        <div class="alertbox btn-red">Trebuie să fiți autentificat cu un cont administrativ pentru a avea acces la această funcție!</div><br/>
-    <?php } ?>
+<?php } ?>
+
+<?php } else { ?>
+    <div class="alertbox btn-red">Trebuie să fiți autentificat cu un cont administrativ pentru a avea acces la această funcție!</div><br/>
+<?php } ?>
 </div>
 
-<?php } ?>
 
 <?php include_once('template_3.php'); ?>
