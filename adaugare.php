@@ -4,71 +4,74 @@ include_once('template_1.php');
 
 $titlu_pagina = "Adaugă o carte";
 
-if (isset($_POST['adaugare_carte'])) {
-    $c_id = random_string();
-    $c_titlu = $_POST['titlu'];
-    $c_autor = $_POST['autor'];
-    $c_isbn = $_POST['isbn'];
-    $c_categorie = $_POST['categorie'];
-    $c_imagine = $_POST['imagine'];
-    $c_descriere = $_POST['descriere'];
+if (isset($_SESSION['user_tip']) && $_SESSION['user_tip'] = 'admin') {
 
-    $stmt = $bazadate -> prepare("INSERT INTO biblioteca_carti (id, titlu, autor, isbn, categorie, imagine, descriere) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt -> bind_param("sssssss", $c_id, $c_titlu, $c_autor, $c_isbn, $c_categorie, $c_imagine, $c_descriere);
-    $status = $stmt -> execute();
-    $page_msg = "insert_" . ($status ? "ok" : "fail");
+    if (isset($_POST['adaugare_carte'])) {
+        $c_id = random_string();
+        $c_titlu = $_POST['titlu'];
+        $c_autor = $_POST['autor'];
+        $c_isbn = $_POST['isbn'];
+        $c_categorie = $_POST['categorie'];
+        $c_imagine = $_POST['imagine'];
+        $c_descriere = $_POST['descriere'];
 
-} else if (isset($_POST['editare_carte'])) {
-    $c_id = $_POST['id'];
-    $c_titlu = $_POST['titlu'];
-    $c_autor = $_POST['autor'];
-    $c_isbn = $_POST['isbn'];
-    $c_categorie = $_POST['categorie'];
-    $c_imagine = $_POST['imagine'];
-    $c_descriere = $_POST['descriere'];
+        $stmt = $bazadate -> prepare("INSERT INTO biblioteca_carti (id, titlu, autor, isbn, categorie, imagine, descriere) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt -> bind_param("sssssss", $c_id, $c_titlu, $c_autor, $c_isbn, $c_categorie, $c_imagine, $c_descriere);
+        $status = $stmt -> execute();
+        $page_msg = "insert_" . ($status ? "ok" : "fail");
 
-    $stmt = $bazadate -> prepare("UPDATE biblioteca_carti SET titlu = ?, autor = ?, isbn = ?, categorie = ?, imagine = ?, descriere = ? WHERE id = ?");
-    $stmt -> bind_param("sssssss", $c_titlu, $c_autor, $c_isbn, $c_categorie, $c_imagine, $c_descriere, $c_id);
-    $status = $stmt -> execute();
-    $page_msg = "edit_" . ($status ? "ok" : "fail");
-    $_SESSION['result_msg'] = $page_msg;
-    redirect('carte.php?id=' . $c_id);
+    } else if (isset($_POST['editare_carte'])) {
+        $c_id = $_POST['id'];
+        $c_titlu = $_POST['titlu'];
+        $c_autor = $_POST['autor'];
+        $c_isbn = $_POST['isbn'];
+        $c_categorie = $_POST['categorie'];
+        $c_imagine = $_POST['imagine'];
+        $c_descriere = $_POST['descriere'];
 
-} else if (isset($_GET['editeaza'])) {
-    $titlu_pagina = "Modifică o carte";
-    $c_id = $_GET['editeaza'];
-    $stmt = $bazadate -> prepare("SELECT * FROM biblioteca_carti WHERE id = ?");
-    $stmt -> bind_param("s", $c_id);
-    $stmt -> execute();
-    $c_data;
-    $result = $stmt -> get_result();
-    if ($row = $result -> fetch_assoc()) {
-        $c_data = $row;
-    } else {
-        $page_msg = 'not_found';
+        $stmt = $bazadate -> prepare("UPDATE biblioteca_carti SET titlu = ?, autor = ?, isbn = ?, categorie = ?, imagine = ?, descriere = ? WHERE id = ?");
+        $stmt -> bind_param("sssssss", $c_titlu, $c_autor, $c_isbn, $c_categorie, $c_imagine, $c_descriere, $c_id);
+        $status = $stmt -> execute();
+        $page_msg = "edit_" . ($status ? "ok" : "fail");
+        $_SESSION['result_msg'] = $page_msg;
+        redirect('carte.php?id=' . $c_id);
+
+    } else if (isset($_GET['editeaza'])) {
+        $titlu_pagina = "Modifică o carte";
+        $c_id = $_GET['editeaza'];
+        $stmt = $bazadate -> prepare("SELECT * FROM biblioteca_carti WHERE id = ?");
+        $stmt -> bind_param("s", $c_id);
+        $stmt -> execute();
+        $c_data;
+        $result = $stmt -> get_result();
+        if ($row = $result -> fetch_assoc()) {
+            $c_data = $row;
+        } else {
+            $page_msg = 'not_found';
+        }
+    } else if (isset($_GET['sterge'])) {
+        $titlu_pagina = "Șterge o carte";
+        $tip_pagina = "sterge";
+        $c_id = $_GET['sterge'];
+        $stmt = $bazadate -> prepare("SELECT * FROM biblioteca_carti WHERE id = ?");
+        $stmt -> bind_param("s", $c_id);
+        $stmt -> execute();
+        $c_data;
+        $result = $stmt -> get_result();
+        if ($row = $result -> fetch_assoc()) {
+            $c_data = $row;
+        } else {
+            $page_msg = 'not_found';
+        }
+    } else if (isset($_GET['confirma_stergere'])) {
+        $titlu_pagina = "Cartea a fost ștearsă cu succes!";
+        $tip_pagina = "sterge";
+        $c_id = $_GET['confirma_stergere'];
+        $stmt = $bazadate -> prepare("DELETE FROM biblioteca_carti WHERE id = ?");
+        $stmt -> bind_param("s", $c_id);
+        $stmt -> execute();
+        $page_msg = 'sterge_ok';
     }
-} else if (isset($_GET['sterge'])) {
-    $titlu_pagina = "Șterge o carte";
-    $tip_pagina = "sterge";
-    $c_id = $_GET['sterge'];
-    $stmt = $bazadate -> prepare("SELECT * FROM biblioteca_carti WHERE id = ?");
-    $stmt -> bind_param("s", $c_id);
-    $stmt -> execute();
-    $c_data;
-    $result = $stmt -> get_result();
-    if ($row = $result -> fetch_assoc()) {
-        $c_data = $row;
-    } else {
-        $page_msg = 'not_found';
-    }
-} else if (isset($_GET['confirma_stergere'])) {
-    $titlu_pagina = "Cartea a fost ștearsă cu succes!";
-    $tip_pagina = "sterge";
-    $c_id = $_GET['confirma_stergere'];
-    $stmt = $bazadate -> prepare("DELETE FROM biblioteca_carti WHERE id = ?");
-    $stmt -> bind_param("s", $c_id);
-    $stmt -> execute();
-    $page_msg = 'sterge_ok';
 }
 
 include_once('template_2.php');
