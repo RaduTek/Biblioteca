@@ -21,8 +21,18 @@ if (isset($_GET['carte'])) {
     } else {
         $page_msg = 'book_not_found';
     }
-} else if (isset($_GET['id'])) {
+} else if (isset($_POST['id'])) {
+    $c_id = random_string(8);
+    $c_user = $_SESSION['user_id'];
+    $c_carte = $_POST['id'];
+    $c_inceput = $_POST['inceput'];
+    $c_sfarsit = $_POST['sfarsit'];
+    $c_stare = "asteptare";
 
+    $stmt = $bazadate -> prepare("INSERT INTO biblioteca_imprumuturi (id, user, carte, inceput, sfarsit, stare) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt -> bind_param("ssssss", $c_id, $c_user, $c_carte, $c_inceput, $c_sfarsit, $c_stare);
+    $status = $stmt -> execute();
+    $page_msg = "insert_" . ($status ? "ok" : "fail");
 }
 
 ?>
@@ -41,6 +51,18 @@ if (isset($_GET['carte'])) {
         Împrumutul cu ID-ul specificat nu a fost găsit.
     </div><br>
     <a href="cont.php?imprumuturi" class="btn">Înapoi la lista de împrumutului</a>
+<?php } else if ($page_msg == "insert_ok") { ?> 
+    <h1>Împrumută cartea</h1>
+    <div class="alertbox btn-green">
+        Împrumutul a fost realizat cu succes!
+    </div><br>
+    <a href="cont.php?imprumuturi" class="btn">Mergi spre lista de împrumutului</a>
+<?php } else if ($page_msg == "insert_fail") { ?> 
+    <h1>Împrumută cartea</h1>
+    <div class="alertbox btn-red">
+        Eroare la înregistrarea împrumutului!
+    </div><br>
+    <a href="cont.php?imprumuturi" class="btn">Mergi spre lista de împrumutului</a>
 <?php } else if ($page_msg == "book_found") { ?>
     <h1>Împrumută cartea</h1>
     <div class="sub book-list">
@@ -59,7 +81,8 @@ if (isset($_GET['carte'])) {
             </div>
         </div>
     </div>
-    <form action="" method="POST">
+    <form action="imprumut.php" method="POST">
+        <input type="hidden" name="id" value="<?php echo $_GET['carte']; ?>">
         <label class="form-field">
             Data de început<br />
             <input type="date" class="textbox" name="inceput" style="width: 100%;" required />
@@ -68,8 +91,8 @@ if (isset($_GET['carte'])) {
             Data finalizării<br />
             <input type="date" class="textbox" name="sfarsit" style="width: 100%;" required />
         </label>
-        <div>
-
+        <div class="form-field">
+            <button type="submit" class="btn btn-green">Împrumută</button>
         </div>
     </form>
 <?php } ?>
