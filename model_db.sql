@@ -56,8 +56,9 @@ CREATE TABLE `biblioteca_imprumuturi` (
   `id` varchar(20) NOT NULL,
   `user` tinytext NOT NULL,
   `carte` tinytext NOT NULL,
-  `inceput` date NOT NULL,
-  `durata` int NOT NULL
+  `inceput` date NOT NULL,  
+  `sfarsit` date NOT NULL,
+  `stare` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
